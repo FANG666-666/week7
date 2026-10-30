@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Yuhao.Fang</title>
+  <meta name="description" content="A selection of projects by Yuhao.Fang: web apps, mobile apps, and brand design work." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============ Header / Navigation ============ -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">Y</span>
+          Yuhao.Fang
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="index.html">Home</a>
+          <a href="resume.html">Resume</a>
+          <a href="projects.html" class="active">Projects</a>
+          <a href="contact.html">Contact Me</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Page hero ============ -->
+    <section class="page-hero">
+      <div class="container">
+        <h1>Things I've Made</h1>
+        <p>A mix of web apps, mobile experiments, and design work. Each one taught me something new — usually about myself at 2 a.m. debugging it.</p>
+      </div>
+    </section>
+
+    <!-- ============ Projects ============ -->
+    <section class="section">
+      <div class="container">
+
+        <!-- Filters -->
+        <div class="filters reveal" role="group" aria-label="Filter projects by category">
+          <button class="filter-btn active" type="button" data-filter="all">All</button>
+          <button class="filter-btn" type="button" data-filter="web">Web</button>
+          <button class="filter-btn" type="button" data-filter="mobile">Mobile</button>
+          <button class="filter-btn" type="button" data-filter="design">Design</button>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- Project 1 -->
+          <article class="project-card reveal" data-category="mobile">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=mobile%20travel%20planning%20app%20interface%20on%20a%20smartphone%2C%20cool%20teal%20blue%20and%20soft%20mint%20green%20color%20palette%2C%20map%20with%20location%20pins%2C%20mountains%20and%20sun%20illustration%2C%20modern%20clean%20UI%20design%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Wanderlust travel planning app showing a map with location pins"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Mobile App</span>
+            </div>
+            <div class="project-body">
+              <h3>Wanderlust</h3>
+              <p>A travel-planning app that turns messy bookmarks and screenshots into one shareable day-by-day itinerary with offline maps.</p>
+              <div class="project-tags">
+                <span class="tag">Figma</span><span class="tag">React Native</span><span class="tag">Maps API</span>
+              </div>
+              <div class="project-links">
+                <!-- EDIT: replace placeholder links -->
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Source
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 4 9c0 5.1 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cozy%20cooking%20recipe%20website%20interface%20illustration%2C%20pot%20with%20steam%20and%20fresh%20vegetables%20on%20wooden%20table%2C%20cool%20teal%20blue%20and%20soft%20green%20kitchen%20tones%2C%20modern%20flat%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Cozy Kitchen recipe website with a steaming pot and fresh vegetables"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>Cozy Kitchen</h3>
+              <p>A community recipe site where home cooks can scale servings, build weekly meal plans, and swap tips in a friendly comment culture.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span><span class="tag">Node.js</span><span class="tag">PostgreSQL</span>
+              </div>
+              <div class="project-links">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Source
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 4 9c0 5.1 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimal%20productivity%20dashboard%20web%20app%20interface%2C%20calendar%20tasks%20and%20habit%20tracker%20cards%2C%20small%20desk%20plant%2C%20cool%20sky%20blue%20and%20sage%20green%20colors%2C%20modern%20flat%20UI%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Focus Flow productivity dashboard with calendar and habit cards"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>Focus Flow</h3>
+              <p>A calm productivity dashboard pairing a pomodoro timer with weekly habit tracking. No streaks shaming — just gentle encouragement.</p>
+              <div class="project-tags">
+                <span class="tag">Vue</span><span class="tag">CSS Grid</span><span class="tag">LocalStorage</span>
+              </div>
+              <div class="project-links">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Source
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 4 9c0 5.1 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 4 -->
+          <article class="project-card reveal" data-category="mobile">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cheerful%20weather%20mobile%20app%20interface%20on%20smartphone%2C%20sunshine%20and%20soft%20clouds%2C%20fresh%20sky%20blue%20and%20mint%20green%20color%20palette%2C%20friendly%20modern%20UI%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Daylight weather app showing sunshine and soft clouds"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Mobile App</span>
+            </div>
+            <div class="project-body">
+              <h3>Daylight Weather</h3>
+              <p>A deliberately small weather app: one glanceable screen, honest forecasts, and a "should I bring a jacket?" nudge each morning.</p>
+              <div class="project-tags">
+                <span class="tag">Flutter</span><span class="tag">Weather API</span><span class="tag">Motion</span>
+              </div>
+              <div class="project-links">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Source
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 4 9c0 5.1 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 5 -->
+          <article class="project-card reveal" data-category="design">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=warm%20friendly%20brand%20identity%20design%20mockup%2C%20logo%20business%20cards%20and%20tote%20bag%20flat%20lay%2C%20ocean%20blue%20teal%20and%20soft%20sage%20green%20colors%2C%20modern%20stationery%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Maple & Oat brand identity: logo, business cards, and tote bag flat lay"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Brand Design</span>
+            </div>
+            <div class="project-body">
+              <h3>Maple &amp; Oat</h3>
+              <p>Complete visual identity for a neighborhood bakery — logo, packaging, signage, and a warm, hand-drawn illustration system.</p>
+              <div class="project-tags">
+                <span class="tag">Branding</span><span class="tag">Illustrator</span><span class="tag">Packaging</span>
+              </div>
+              <div class="project-links">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Case study
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 6 -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=hiking%20community%20website%20interface%20illustration%2C%20winding%20mountain%20trail%20with%20hikers%20and%20pine%20trees%2C%20cool%20blue%20and%20green%20tones%20with%20soft%20morning%20light%2C%20modern%20flat%20illustration%20style%2C%20high%20quality&image_size=landscape_4_3"
+                alt="TrailMark hiking community website with a mountain trail at sunset"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>TrailMark</h3>
+              <p>A community site where hikers share GPX trails, condition reports, and post-hike bakery recommendations (arguably the key feature).</p>
+              <div class="project-tags">
+                <span class="tag">React</span><span class="tag">Mapbox</span><span class="tag">Tailwind</span>
+              </div>
+              <div class="project-links">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Source
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-1-2.6c3-.3 6-1.5 6-6.6a5.1 5.1 0 0 0-1.4-3.5 4.7 4.7 0 0 0-.1-3.5s-1.1-.3-3.5 1.3a12 12 0 0 0-6 0C6.6 1.7 5.5 2 5.5 2a4.7 4.7 0 0 0-.1 3.5A5.1 5.1 0 0 0 4 9c0 5.1 3 6.3 6 6.6a3.4 3.4 0 0 0-1 2.6V22"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 7 — To-Do List App (live, self-contained demo) -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=minimal%20to-do%20list%20web%20app%20interface%2C%20checklist%20with%20checkboxes%2C%20a%20date%20picker%20and%20priority%20tags%2C%20clean%20modern%20UI%2C%20soft%20blue%20and%20green%20palette%2C%20flat%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="To-Do List app showing a checklist with checkboxes, a date picker, and priority tags"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>To-Do List App</h3>
+              <p>A clean, mobile-friendly to-do list with a date picker, low/medium/high priority levels, a live "X of Y completed" counter, and a little confetti when you finish a task. Built as a self-contained static site with plain HTML, CSS, and vanilla JavaScript — open the live demo and try it.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="todo-app.html" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 8 — Weather App (live, self-contained demo) -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=clean%20city%20weather%20web%20app%20interface%2C%20large%20sun%20and%20soft%20clouds%20icon%2C%20temperature%20reading%20and%20a%20search%20box%2C%20cool%20sky%20blue%20and%20mint%20green%20palette%2C%20modern%20minimal%20UI%20illustration%2C%20high%20quality&image_size=landscape_4_3"
+                alt="Weather app showing a large weather icon, a temperature reading, and a city search box"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>Weather App</h3>
+              <p>A small city-weather app: type a city, hit Search, and see the current temperature, conditions, and a matching weather icon. Handles loading, unknown cities, and empty input gracefully. Built as a self-contained static page with plain HTML, CSS, and vanilla JavaScript, powered by the UAPI Weather API — open the live demo and try it.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">REST API</span>
+              </div>
+              <div class="project-links">
+                <a href="weather-app.html" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 9 — Mechanics Phenomena Visualized (live, self-contained demo) -->
+          <article class="project-card reveal" data-category="web">
+            <div class="project-thumb">
+              <img
+                src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dark%20futuristic%20physics%20simulation%20scene%2C%20glowing%20blue%20and%20red%20planets%20orbiting%20a%20bright%20red%20giant%20star%2C%20black%20space%20background%20with%20neon%20cyan%20orbital%20light%20trails%2C%20holographic%20control%20panel%2C%20high%20quality%20digital%20art&image_size=landscape_4_3"
+                alt="Gravity simulation with glowing planets orbiting a bright star on a dark background"
+                loading="lazy" width="800" height="600"
+              />
+              <span class="cat">Web App</span>
+            </div>
+            <div class="project-body">
+              <h3>Mechanics Phenomena Visualized</h3>
+              <p>An interactive n-body gravity lesson: glowing worlds attract each other, collide and merge into bigger ones. Drag to slingshot new planets, tune gravity strength and cosmic expansion, toggle motion trails and merging, or generate a stable galaxy or a binary-star system — all in one self-contained HTML file with vanilla JavaScript and canvas.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Canvas</span>
+              </div>
+              <div class="project-links">
+                <a href="physics-lab.html" target="_blank" rel="noopener noreferrer">Live demo
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer with fun fact ============ -->
+  <footer class="site-footer">
+    <div class="footer-funfact">
+      <span class="fun-label">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+        Fun fact about me
+      </span>
+      <p>It took a whole day to assemble a Lego castle.</p>
+    </div>
+    <div class="container footer-bottom">
+      <span class="footer-brand">
+        <span class="brand-mark">Y</span>
+        Yuhao.Fang
+      </span>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <span>&copy; 2026 Yuhao.Fang · Made with care</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

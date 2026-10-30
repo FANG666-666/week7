@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List App — Yuhao.Fang</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      :root {
+        --bg: #f4f5f7;
+        --card: #ffffff;
+        --text: #1f2933;
+        --muted: #7b8794;
+        --border: #e1e4e8;
+        --accent: #2563eb;
+        --accent-soft: #dbeafe;
+        --danger: #e53e3e;
+        --done: #9aa5b1;
+
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+          'Helvetica Neue', Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        color: var(--text);
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      button {
+        font-family: inherit;
+      }
+
+      input,
+      button {
+        font-size: 1rem;
+      }
+
+      .page {
+        min-height: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 1.25rem 1rem 2.5rem;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 30rem;
+      }
+
+      .app__header {
+        margin: 0.5rem 0 1.25rem;
+      }
+
+      .app__header h1 {
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .app__sub {
+        margin: 0.25rem 0 0;
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+
+      .sync {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        margin: 0.4rem 0 0;
+        padding: 0.2rem 0.55rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        background: var(--border);
+        color: var(--muted);
+        max-width: fit-content;
+      }
+
+      .sync__dot {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background: currentColor;
+        flex: none;
+      }
+
+      .sync--checking { color: #b45309; background: #fef3c7; }
+      .sync--online { color: #15803d; background: #dcfce7; }
+      .sync--offline { color: #b91c1c; background: #fee2e2; }
+
+      /* Add form */
+      .add-form {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 1rem;
+        padding: 0.875rem;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+        display: flex;
+        flex-direction: column;
+        gap: 0.625rem;
+      }
+
+      .add-form__row {
+        display: flex;
+      }
+
+      .add-form__text {
+        flex: 1;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 0.625rem;
+        background: #fff;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .add-form__text:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+
+      .add-form__row--controls {
+        align-items: center;
+        gap: 0.625rem;
+        flex-wrap: wrap;
+      }
+
+      .add-form__date {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1;
+        min-width: 11rem;
+      }
+
+      .add-form__date-label {
+        color: var(--muted);
+        font-size: 0.8125rem;
+        white-space: nowrap;
+      }
+
+      .add-form__date input {
+        flex: 1;
+        min-width: 0;
+        padding: 0.5rem 0.625rem;
+        border: 1px solid var(--border);
+        border-radius: 0.625rem;
+        background: #fff;
+        color: var(--text);
+        outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .add-form__date input:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+
+      .add-form__btn {
+        padding: 0.625rem 1.25rem;
+        border: none;
+        border-radius: 0.625rem;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.15s ease, transform 0.05s ease, opacity 0.15s ease;
+      }
+
+      .add-form__btn:hover:not(:disabled) {
+        background: #1d4ed8;
+      }
+
+      .add-form__btn:active:not(:disabled) {
+        transform: translateY(1px);
+      }
+
+      .add-form__btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      /* Priority picker */
+      .add-form__row--priority {
+        align-items: center;
+        gap: 0.625rem;
+        flex-wrap: wrap;
+      }
+
+      .priority {
+        display: inline-flex;
+        gap: 0.125rem;
+        background: #f1f3f5;
+        padding: 0.25rem;
+        border-radius: 0.625rem;
+      }
+
+      .priority__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.35rem 0.55rem;
+        border: none;
+        background: transparent;
+        border-radius: 0.4rem;
+        color: var(--muted);
+        cursor: pointer;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+      }
+
+      .priority__btn:hover {
+        color: var(--text);
+      }
+
+      .priority__emoji {
+        font-size: 0.85rem;
+        line-height: 1;
+      }
+
+      .priority__btn--active {
+        background: #fff;
+        color: var(--text);
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1);
+      }
+
+      .priority__btn--active.priority__btn--low { color: #16a34a; }
+      .priority__btn--active.priority__btn--medium { color: #d97706; }
+      .priority__btn--active.priority__btn--high { color: #dc2626; }
+
+      /* List */
+      .todo-list {
+        list-style: none;
+        margin: 1rem 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .todo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 0.875rem;
+        padding: 0.625rem 0.75rem 0.625rem 0.625rem;
+        box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+        transition: opacity 0.15s ease;
+      }
+
+      .todo--done {
+        opacity: 0.7;
+      }
+
+      .todo__check {
+        position: relative;
+        display: inline-flex;
+        flex: 0 0 auto;
+        cursor: pointer;
+      }
+
+      .todo__check input {
+        position: absolute;
+        opacity: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .todo__check-box {
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 2px solid var(--border);
+        border-radius: 0.375rem;
+        background: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.15s ease, border-color 0.15s ease;
+      }
+
+      .todo__check input:checked + .todo__check-box {
+        background: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .todo__check input:checked + .todo__check-box::after {
+        content: '';
+        width: 0.35rem;
+        height: 0.625rem;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg) translate(-1px, -1px);
+      }
+
+      .todo__check input:focus-visible + .todo__check-box {
+        box-shadow: 0 0 0 3px var(--accent-soft);
+      }
+
+      .todo__body {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.125rem;
+      }
+
+      .todo__head {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .badge {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 1.25rem;
+        height: 1.25rem;
+        padding: 0 0.3rem;
+        font-size: 0.75rem;
+        line-height: 1;
+        border-radius: 0.4rem;
+        background: #f1f3f5;
+      }
+
+      .badge--low { background: #dcfce7; }
+      .badge--medium { background: #fef3c7; }
+      .badge--high { background: #fee2e2; }
+
+      .todo__text {
+        font-size: 0.9375rem;
+        line-height: 1.3;
+        word-break: break-word;
+        color: var(--text);
+      }
+
+      .todo--done .todo__text {
+        color: var(--done);
+        text-decoration: line-through;
+      }
+
+      .todo__date {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .todo__del {
+        flex: 0 0 auto;
+        width: 1.75rem;
+        height: 1.75rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 0.5rem;
+        background: transparent;
+        color: var(--muted);
+        font-size: 1.25rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+
+      .todo__del:hover {
+        background: #fee2e2;
+        color: var(--danger);
+      }
+
+      .empty {
+        margin: 1.5rem 0 0;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.875rem;
+      }
+
+      /* Confetti burst on task completion */
+      .confetti {
+        position: fixed;
+        z-index: 50;
+        pointer-events: none;
+      }
+
+      .confetti__bit {
+        position: absolute;
+        left: 0;
+        top: 0;
+        font-size: 1.1rem;
+        line-height: 1;
+        opacity: 0;
+        transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+        animation: confetti-burst 900ms ease-out forwards;
+      }
+
+      @keyframes confetti-burst {
+        0% {
+          opacity: 1;
+          transform: translate(-50%, -50%) rotate(0deg) scale(0.5);
+        }
+        60% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)))
+            rotate(var(--rot)) scale(1.15);
+        }
+      }
+
+      /* Phone-friendly tweaks */
+      @media (max-width: 30rem) {
+        .app__header h1 {
+          font-size: 1.5rem;
+        }
+        .add-form {
+          padding: 0.75rem;
+        }
+        .todo {
+          padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+          gap: 0.625rem;
+        }
+        .todo__del {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <main class="app">
+        <header class="app__header">
+          <h1>Projects</h1>
+          <p class="app__sub" id="counter">0 of 0 tasks completed</p>
+          <p class="sync sync--checking" id="sync" title="Connecting to cloud…">
+            <span class="sync__dot" aria-hidden="true"></span>
+            <span id="sync-label">Connecting to cloud…</span>
+          </p>
+        </header>
+
+        <section class="add-form" aria-label="Add task">
+          <div class="add-form__row">
+            <input
+              class="add-form__text"
+              id="text"
+              type="text"
+              placeholder="Add a task..."
+              autocomplete="off"
+            />
+          </div>
+          <div class="add-form__row add-form__row--priority">
+            <span class="add-form__date-label">Priority</span>
+            <div class="priority" role="group" aria-label="Priority" id="priority"></div>
+          </div>
+          <div class="add-form__row add-form__row--controls">
+            <label class="add-form__date">
+              <span class="add-form__date-label">Date</span>
+              <input type="date" id="date" />
+            </label>
+            <button class="add-form__btn" id="add-btn" type="button" disabled>
+              Add
+            </button>
+          </div>
+        </section>
+
+        <ul class="todo-list" id="list"></ul>
+        <p class="empty" id="empty">No tasks yet. Add your first one.</p>
+      </main>
+
+      <div class="confetti" id="confetti" style="display:none"></div>
+    </div>
+
+    <script>
+      // ---- Supabase config (unchanged integration: same project, key & todos table) ----
+      // Talk to the PostgREST endpoint directly with the publishable key, so the
+      // app stays a zero-dependency static site while still syncing with the cloud.
+      const SUPABASE_URL = 'https://sgcugveisaleusokhkvf.supabase.co'
+      const SUPABASE_KEY = 'sb_publishable_rDLBa3Oi01n47OleQ3WY6Q_o1BHr0dN'
+      const REST = SUPABASE_URL + '/rest/v1/todos'
+      const STORAGE_KEY = 'projects.todos.v1'
+
+      const PRIORITIES = [
+        { key: 'low', label: 'Low', emoji: '🟢' },
+        { key: 'medium', label: 'Medium', emoji: '🟡' },
+        { key: 'high', label: 'High', emoji: '🔴' },
+      ]
+
+      let todos = []
+      let syncMode = 'checking' // 'checking' | 'online' | 'offline'
+      let selectedPriority = 'medium'
+
+      const $ = (id) => document.getElementById(id)
+      const $text = $('text')
+      const $date = $('date')
+      const $list = $('list')
+      const $empty = $('empty')
+      const $counter = $('counter')
+      const $sync = $('sync')
+      const $syncLabel = $('sync-label')
+      const $priority = $('priority')
+      const $addBtn = $('add-btn')
+      const $confetti = $('confetti')
+
+      // ---- helpers ----
+      function newId() {
+        if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+          try { return crypto.randomUUID() } catch (_) {}
+        }
+        return 'id-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2)
+      }
+
+      function loadTodos() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY)
+          const parsed = raw ? JSON.parse(raw) : []
+          if (!Array.isArray(parsed)) return []
+          return parsed.map((t) => ({
+            id: t.id ?? newId(),
+            text: t.text ?? '',
+            date: t.date ?? '',
+            done: !!t.done,
+            priority: t.priority ?? 'medium',
+          }))
+        } catch (_) {
+          return []
+        }
+      }
+
+      function todayIso() {
+        const d = new Date()
+        const off = d.getTimezoneOffset() * 60000
+        return new Date(d.getTime() - off).toISOString().slice(0, 10)
+      }
+
+      function formatDate(iso) {
+        if (!iso) return ''
+        const [y, m, d] = iso.split('-')
+        return y + '/' + m + '/' + d
+      }
+
+      function rowToTodo(r) {
+        return {
+          id: String(r.id),
+          text: r.task ?? '',
+          date: r.date ?? '',
+          done: !!r.is_complete,
+          priority: r.priority ?? 'medium',
+        }
+      }
+
+      // ---- Supabase REST (PostgREST) ----
+      function headers(jsonBody, prefer) {
+        const h = {
+          apikey: SUPABASE_KEY,
+          Authorization: 'Bearer ' + SUPABASE_KEY,
+        }
+        if (jsonBody) h['Content-Type'] = 'application/json'
+        if (prefer) h['Prefer'] = prefer
+        return h
+      }
+
+      async function fetchTodos() {
+        const res = await fetch(
+          REST + '?select=id,task,date,is_complete,priority,created_at&order=created_at.asc',
+          { headers: headers() },
+        )
+        if (!res.ok) throw new Error('GET todos failed: ' + res.status)
+        const data = await res.json()
+        return (data ?? []).map(rowToTodo)
+      }
+
+      async function insertTodo(payload) {
+        const res = await fetch(REST, {
+          method: 'POST',
+          headers: headers(true, 'return=representation'),
+          body: JSON.stringify(payload),
+        })
+        if (!res.ok) throw new Error('INSERT failed: ' + res.status)
+        const data = await res.json()
+        return Array.isArray(data) && data[0] ? rowToTodo(data[0]) : null
+      }
+
+      async function updateTodo(id, patch) {
+        const res = await fetch(REST + '?id=eq.' + encodeURIComponent(id), {
+          method: 'PATCH',
+          headers: headers(true, 'return=representation'),
+          body: JSON.stringify(patch),
+        })
+        if (!res.ok) throw new Error('PATCH failed: ' + res.status)
+      }
+
+      async function deleteTodoRemote(id) {
+        const res = await fetch(REST + '?id=eq.' + encodeURIComponent(id), {
+          method: 'DELETE',
+          headers: headers(),
+        })
+        if (!res.ok) throw new Error('DELETE failed: ' + res.status)
+      }
+
+      // ---- state + render ----
+      function persist() {
+        try { localStorage.setItem(STORAGE_KEY, JSON.stringify(todos)) } catch (_) {}
+      }
+
+      function setOffline() {
+        syncMode = 'offline'
+        renderSync()
+      }
+
+      function renderSync() {
+        $sync.className = 'sync sync--' + syncMode
+        const label =
+          syncMode === 'checking'
+            ? 'Connecting to cloud…'
+            : syncMode === 'online'
+              ? 'Synced with cloud'
+              : 'Offline — saved to this browser only'
+        $syncLabel.textContent = label
+        $sync.title =
+          syncMode === 'offline'
+            ? 'Cloud sync unavailable (likely opened via file://). Serve via http(s) to sync with the todos table.'
+            : label
+      }
+
+      function renderCounter() {
+        const total = todos.length
+        const done = todos.filter((t) => t.done).length
+        $counter.textContent = done + ' of ' + total + ' tasks completed'
+      }
+
+      function sortedTodos() {
+        return [...todos].sort((a, b) => {
+          if (a.done !== b.done) return a.done ? 1 : -1
+          return (a.date || '').localeCompare(b.date || '')
+        })
+      }
+
+      function renderList() {
+        $list.innerHTML = ''
+        const sorted = sortedTodos()
+        for (const t of sorted) {
+          const li = document.createElement('li')
+          li.className = 'todo' + (t.done ? ' todo--done' : '')
+
+          const label = document.createElement('label')
+          label.className = 'todo__check'
+          const cb = document.createElement('input')
+          cb.type = 'checkbox'
+          cb.checked = t.done
+          cb.addEventListener('change', (e) => toggleTodo(t.id, e))
+          const box = document.createElement('span')
+          box.className = 'todo__check-box'
+          box.setAttribute('aria-hidden', 'true')
+          label.appendChild(cb)
+          label.appendChild(box)
+          li.appendChild(label)
+
+          const body = document.createElement('div')
+          body.className = 'todo__body'
+          const head = document.createElement('div')
+          head.className = 'todo__head'
+          const badge = document.createElement('span')
+          badge.className = 'badge badge--' + t.priority
+          badge.setAttribute('aria-label', 'Priority: ' + t.priority)
+          badge.textContent =
+            (PRIORITIES.find((p) => p.key === t.priority) || {}).emoji || ''
+          const text = document.createElement('span')
+          text.className = 'todo__text'
+          text.textContent = t.text
+          head.appendChild(badge)
+          head.appendChild(text)
+          body.appendChild(head)
+          if (t.date) {
+            const d = document.createElement('span')
+            d.className = 'todo__date'
+            d.textContent = formatDate(t.date)
+            body.appendChild(d)
+          }
+          li.appendChild(body)
+
+          const del = document.createElement('button')
+          del.className = 'todo__del'
+          del.type = 'button'
+          del.setAttribute('aria-label', 'Delete')
+          del.textContent = '×'
+          del.addEventListener('click', () => deleteTodo(t.id))
+          li.appendChild(del)
+
+          $list.appendChild(li)
+        }
+        $empty.style.display = sorted.length === 0 ? '' : 'none'
+      }
+
+      function renderAll() {
+        renderList()
+        renderCounter()
+      }
+
+      function buildPriorityPicker() {
+        $priority.innerHTML = ''
+        for (const p of PRIORITIES) {
+          const btn = document.createElement('button')
+          btn.type = 'button'
+          btn.className =
+            'priority__btn priority__btn--' +
+            p.key +
+            (selectedPriority === p.key ? ' priority__btn--active' : '')
+          btn.setAttribute('aria-pressed', selectedPriority === p.key)
+          const emoji = document.createElement('span')
+          emoji.className = 'priority__emoji'
+          emoji.setAttribute('aria-hidden', 'true')
+          emoji.textContent = p.emoji
+          btn.appendChild(emoji)
+          btn.appendChild(document.createTextNode(p.label))
+          btn.addEventListener('click', () => {
+            selectedPriority = p.key
+            buildPriorityPicker()
+          })
+          $priority.appendChild(btn)
+        }
+      }
+
+      // ---- confetti ----
+      let burstTimer = null
+      function fireConfetti(rect) {
+        $confetti.innerHTML = ''
+        $confetti.style.left = rect.left + rect.width / 2 + 'px'
+        $confetti.style.top = rect.top + rect.height / 2 + 'px'
+        $confetti.style.display = ''
+        const emojis = ['🎉', '✨', '⭐', '💫', '🎊', '🌟', '🎈']
+        for (let i = 0; i < 16; i++) {
+          const angle = (i / 16) * Math.PI * 2 + (Math.random() - 0.5) * 0.4
+          const dist = 45 + Math.random() * 55
+          const dx = Math.cos(angle) * dist
+          const dy = Math.sin(angle) * dist - 25
+          const rot = (Math.random() - 0.5) * 720
+          const delay = Math.random() * 80
+          const span = document.createElement('span')
+          span.className = 'confetti__bit'
+          span.textContent = emojis[i % emojis.length]
+          span.style.setProperty('--dx', dx + 'px')
+          span.style.setProperty('--dy', dy + 'px')
+          span.style.setProperty('--rot', rot + 'deg')
+          span.style.animationDelay = delay + 'ms'
+          $confetti.appendChild(span)
+        }
+        clearTimeout(burstTimer)
+        burstTimer = setTimeout(() => {
+          $confetti.style.display = 'none'
+          $confetti.innerHTML = ''
+        }, 950)
+      }
+
+      // ---- mutations ----
+      async function addTodo() {
+        const value = $text.value.trim()
+        if (!value) return
+        const taskDate = $date.value || todayIso()
+        $text.value = ''
+        $addBtn.disabled = true
+
+        if (syncMode === 'online') {
+          try {
+            const created = await insertTodo({
+              task: value,
+              date: taskDate,
+              is_complete: false,
+              priority: selectedPriority,
+            })
+            if (created) {
+              todos = todos.concat(created)
+              persist()
+              renderAll()
+              return
+            }
+          } catch (_) {
+            setOffline()
+          }
+        }
+        // offline fallback (also reached after a mid-flight cloud failure)
+        todos = todos.concat({
+          id: newId(),
+          text: value,
+          date: taskDate,
+          done: false,
+          priority: selectedPriority,
+        })
+        persist()
+        renderAll()
+      }
+
+      function toggleTodo(id, e) {
+        const todo = todos.find((t) => t.id === id)
+        if (!todo) return
+        const justCompleted = !todo.done
+        const rect = e ? e.currentTarget.getBoundingClientRect() : null
+        todos = todos.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+        persist()
+        renderAll()
+        if (justCompleted && rect) fireConfetti(rect)
+        if (syncMode === 'online') {
+          updateTodo(id, { is_complete: !todo.done }).catch(() => {
+            setOffline()
+            // revert the optimistic flip
+            todos = todos.map((t) => (t.id === id ? { ...t, done: todo.done } : t))
+            persist()
+            renderAll()
+          })
+        }
+      }
+
+      function deleteTodo(id) {
+        const snapshot = todos
+        todos = todos.filter((t) => t.id !== id)
+        persist()
+        renderAll()
+        if (syncMode === 'online') {
+          deleteTodoRemote(id).catch(() => {
+            setOffline()
+            todos = snapshot
+            persist()
+            renderAll()
+          })
+        }
+      }
+
+      // ---- init ----
+      function init() {
+        $date.value = todayIso()
+        buildPriorityPicker()
+        todos = loadTodos()
+        renderAll()
+        renderSync()
+
+        $text.addEventListener('input', () => {
+          $addBtn.disabled = !$text.value.trim()
+        })
+        $text.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') addTodo()
+        })
+        $addBtn.addEventListener('click', addTodo)
+
+        // Try to sync with the cloud todos table. If CORS / network blocks us
+        // (e.g. opened via file://), fall back to localStorage.
+        ;(async () => {
+          try {
+            const rows = await fetchTodos()
+            todos = rows
+            syncMode = 'online'
+          } catch (_) {
+            syncMode = 'offline'
+          }
+          persist()
+          renderAll()
+          renderSync()
+        })()
+      }
+
+      document.addEventListener('DOMContentLoaded', init)
+    </script>
+  </body>
+</html>

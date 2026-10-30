@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuhao.Fang — Welcome to My Corner of the Web</title>
+  <meta name="description" content="Hi, I'm Yuhao.Fang — a product designer based in China who loves turning fuzzy ideas into warm, human things. Welcome to my personal website!" />
+
+  <!-- Friendly rounded fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- ============ Header / Navigation ============ -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">Y</span>
+          Yuhao.Fang
+        </a>
+
+        <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span>
+        </button>
+
+        <div class="nav-links" id="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="resume.html">Resume</a>
+          <a href="projects.html">Projects</a>
+          <a href="contact.html">Contact Me</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ Hero / Introduction ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="hero-badge"><span class="dot"></span> Happy you're here</span>
+          <!-- EDIT: your name and greeting -->
+          <h1>Hi there, I'm <span class="accent">Yuhao.Fang</span>!</h1>
+          <!-- EDIT: your short, friendly introduction -->
+          <p class="lead">
+            I'm a product designer and lifelong curious person based in China.
+            I love turning fuzzy ideas into warm, human things — whether that's a website,
+            a weekend art project, or a too-ambitious dinner for friends. Welcome to my
+            little corner of the internet; grab a cup of something cozy and stay a while.
+          </p>
+          <div class="hero-actions">
+            <a href="projects.html" class="btn btn-primary">See what I've made</a>
+            <a href="contact.html" class="btn btn-ghost">Say hello</a>
+          </div>
+        </div>
+
+        <!-- EDIT: replace with your own headshot -->
+        <figure class="hero-photo">
+          <img
+            src="assets/profile-photo.webp"
+            alt="Headshot of Yuhao.Fang"
+            width="360" height="360"
+          />
+          <span class="photo-chip chip-1">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--terracotta-d)"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            China
+          </span>
+          <span class="photo-chip chip-2">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" style="color:var(--terracotta)"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Coffee powered
+          </span>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ Three Things I Like ============ -->
+    <section class="section bg-cream-deep">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">A few of my favorite things</span>
+          <h2>Three things that make me, me</h2>
+          <p>When I'm not designing, you'll usually find me doing one of these.</p>
+        </div>
+
+        <div class="things-grid">
+          <!-- Thing 1 -->
+          <article class="thing-card reveal">
+            <div class="thing-icon icon-peach">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" y1="12" x2="18" y2="12"/><line x1="6" y1="6" x2="18" y2="6"/><line x1="6" y1="18" x2="18" y2="18"/><rect x="2" y="3" width="20" height="18" rx="2"/></svg>
+            </div>
+            <!-- EDIT: thing #1 title and description -->
+            <h3>Playing games</h3>
+            <p>From cozy farming sims to late-night co-op sessions, games are my way to unwind and stay connected with friends near and far.</p>
+          </article>
+
+          <!-- Thing 2 -->
+          <article class="thing-card reveal">
+            <div class="thing-icon icon-sage">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            </div>
+            <!-- EDIT: thing #2 title and description -->
+            <h3>Drawing</h3>
+            <p>Sketching on weekends with a cup of tea — little characters, city scenes, and the occasional too-ambitious idea that keeps me up past midnight.</p>
+          </article>
+
+          <!-- Thing 3 -->
+          <article class="thing-card reveal">
+            <div class="thing-icon icon-honey">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <!-- EDIT: thing #3 title and description -->
+            <h3>Traveling</h3>
+            <p>New cities, strange street food, and long train rides with a good podcast. I collect postcards and memories in equal measure.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Quick favorites ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">The essentials list</span>
+          <h2>Three all-time favorites</h2>
+          <p>My personality in a nutshell — one movie, one song, and one animal.</p>
+        </div>
+
+        <div class="favorites-card reveal">
+          <ul class="fav-list">
+            <!-- EDIT: your favorite movie -->
+            <li>
+              <span class="fav-label">Favorite movie</span>
+              <span class="fav-value"><strong>Am&eacute;lie (2001)</strong> — whimsical, big-hearted, and I somehow notice a new detail every single rewatch.</span>
+            </li>
+            <!-- EDIT: your favorite song -->
+            <li>
+              <span class="fav-label">Favorite song</span>
+              <span class="fav-value"><strong>&ldquo;Golden Hour&rdquo; by Kacey Musgraves</strong> — my guaranteed good-mood reset, preferably with a window rolled down.</span>
+            </li>
+            <!-- EDIT: your favorite animal -->
+            <li>
+              <span class="fav-label">Favorite animal</span>
+              <span class="fav-value"><strong>The red panda</strong> — fluffy, dramatic, and always looks like it just heard excellent gossip.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer with fun fact ============ -->
+  <footer class="site-footer">
+    <div class="footer-funfact">
+      <span class="fun-label">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15z"/></svg>
+        Fun fact about me
+      </span>
+      <!-- EDIT: your own fun fact -->
+      <p>It took a whole day to assemble a Lego castle.</p>
+    </div>
+    <div class="container footer-bottom">
+      <span class="footer-brand">
+        <span class="brand-mark">Y</span>
+        Yuhao.Fang
+      </span>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="resume.html">Resume</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
+      <span>&copy; 2026 Yuhao.Fang · Made with care</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
